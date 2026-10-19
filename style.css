@@ -1,0 +1,234 @@
+@font-face {
+    font-family: YoungSerif;
+    src:
+        local("Young Serif"),
+        url(./assets/fonts/young-serif/YoungSerif-Regular.ttf) format("truetype");
+}
+
+@font-face {
+    font-family: Outfit;
+    src:
+        local("Outfit"),
+        url(./assets/fonts/outfit/Outfit-VariableFont_wght.ttf) format("truetype");
+}
+
+:root {
+    --color-page-fg: hsl(30, 10%, 34%);
+    --color-page-bg: hsl(30, 54%, 90%);
+    --color-content-bg: hsl(0, 0%, 100%);
+    --color-mainTitle-fg: hsl(24, 5%, 18%);
+    --color-highlight: hsl(14, 45%, 36%);
+    --color-box-bg: hsl(330, 100%, 98%);
+    --color-box-highlight: hsl(332, 51%, 32%);
+    --color-line-highlight: hsl(30, 18%, 87%);
+    --size-breathing: 2rem;
+}
+
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html, body {
+    height: 100%;
+}
+
+html {
+    font-size: 16px;
+}
+
+body {
+    line-height: 1.5rem;
+    font-family: Outfit;
+    background-color: var(--color-page-bg);
+    color: var(--color-page-fg);
+}
+
+.bold,
+.nutrition-value {
+    font-weight: bold;
+}
+
+.wrapperContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100dvh;
+    padding: var(--size-breathing);
+}
+
+.mainContent {
+    --base-border-radius: 2rem;
+    width: 720px;
+    max-height: 100%;
+    border-radius: var(--base-border-radius);
+    background-color: var(--color-content-bg);
+}
+
+.image {
+    width: 100%;
+    border-radius: calc(var(--base-border-radius) * 0.5);
+    object-fit: cover;
+}
+
+.wrapperContent {
+    padding: 0 var(--size-breathing);
+}
+
+.wrapperContent:not(.wrapperContent--image) > * {
+    margin-top: var(--size-breathing);
+}
+
+.wrapperContent--image {
+    padding-top: var(--size-breathing);
+    padding-bottom: 0;
+}
+
+.wrapperContent--recipe {
+    padding-bottom: var(--size-breathing);
+}
+
+.title {
+    font-family: YoungSerif;
+    font-weight: 400;
+    color: var(--color-highlight);
+}
+
+.title--header {
+    --font-size: 2.5rem;
+    font-size: var(--font-size);
+    color: var(--color-mainTitle-fg);
+}
+
+.box {
+    border-radius: calc(var(--base-border-radius) * 0.5);
+    padding: calc(var(--size-breathing) * var(--percentage-padding));
+    background-color: var(--color-box-bg);
+}
+
+.title--box {
+    margin: 0 0  calc(var(--size-breathing) * 0.25) 0;
+    font-family: Outfit;
+    font-weight: 700;
+    font-size: 1.15rem;
+    color: var(--color-box-highlight);
+}
+
+.wrapperContent--recipe {
+    --percentage-padding: 0.75;
+}
+
+.listItem::before {
+    margin-left: 0.5rem;
+    margin-right: calc(var(--size-breathing) * var(--percentage-padding));
+}
+
+.unorderedList, .orderedList {
+    list-style: none;
+}
+
+.unorderedList > .listItem::before {
+    display: inline-block;
+    content: "\2022";
+}
+
+.unorderedList > .listItem,
+.orderedList > .listItem {
+    position: relative;
+    padding-left: 2.25rem;
+}
+
+.orderedList {
+    counter-reset: listItem;
+}
+
+.unorderedList > .listItem::before,
+.orderedList > .listItem::before {
+    position: absolute;
+    left: 0;
+    height: 100%;
+    margin-right: 0;
+}
+
+.orderedList > .listItem::before {
+    counter-increment: listItem;
+    content: counter(listItem)".";
+    font-weight: 900;
+}
+
+.box .listItem::before {
+    color: var(--color-box-highlight);
+}
+
+.listItem::before {
+    color: var(--color-highlight);
+}
+
+.nutritional-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.nutritional-table * {
+    text-align: left;
+}
+
+.nutritional-table__label {
+    font-weight: normal;
+}
+
+.nutritional-table__label,
+.nutrition-value {
+    padding: calc(var(--size-breathing) * (var(--percentage-padding) * 0.70));
+}
+
+.nutrition-value {
+    color: var(--color-highlight);
+}
+
+.nutritional-table__row:not(:last-child) {
+    border-bottom: 1px solid var(--color-line-highlight);
+}
+
+.nutritional-table__row:last-child > * {
+    padding-bottom: 0;
+}
+
+.hr {
+    border-bottom: 1px solid var(--color-line-highlight);
+}
+
+.attribution {
+    padding: 5rem var(--size-breathing);
+    text-align: center;
+}
+
+.attribution a {
+    color: var(--color-highlight);
+}
+
+@media (max-width: 720px) {
+    .wrapperContainer,
+    .wrapperContent--image {
+        padding: 0;
+    }
+
+    .mainContent,
+    .image {
+        border-radius: 0;
+    }
+
+    .title--header {
+        font-size: calc(var(--font-size) * 0.85);
+    }
+
+    .attribution {
+        background-color: var(--color-content-bg);
+    }
+
+
+    .attribution a {
+        white-space: nowrap;
+    }
+}
